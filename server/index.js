@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Import routes
-// const authRoutes = require('./route/authRoute');
-// const userRoutes = require('./route/userRoute');
+const authRoutes = require('./route/authRoute');
+const userRoutes = require('./route/userRoute');
 // const blogRoutes = require('.route/blogRoute');
 // const commentRoutes = require('./route/commentRoute');
 // const likeRoutes = require('./route/likeRoute');
@@ -24,8 +24,8 @@ mongoose.connect(process.env.MONGO_URL)
 .catch((err) => console.error('MongoDB connection error:', err));
 
 // Mount routes
-// app.use('/api/auth', authRoutes);
-// app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 // app.use('/api/blogs', blogRoutes);
 // app.use('/api/comments', commentRoutes);
 // app.use('/api/likes', likeRoutes);
