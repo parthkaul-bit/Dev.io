@@ -8,8 +8,8 @@ require('dotenv').config();
 const authRoutes = require('./route/authRoute');
 const userRoutes = require('./route/userRoute');
 const blogRoutes = require('./route/blogRoute');
-// const commentRoutes = require('./route/commentRoute');
-// const likeRoutes = require('./route/likeRoute');
+const commentRoutes = require('./route/commentRoute');
+const likeRoutes = require('./route/likeRoute');
 
 // Initialize the app
 const app = express();
@@ -27,8 +27,8 @@ mongoose.connect(process.env.MONGO_URL)
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/blogs', blogRoutes);
-// app.use('/api/comments', commentRoutes);
-// app.use('/api/likes', likeRoutes);
+app.use('/api/comments', commentRoutes);
+app.use('/api/likes', likeRoutes);
 
 // Default route
 app.get('/', (req, res) => {
