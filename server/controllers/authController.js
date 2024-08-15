@@ -5,7 +5,11 @@ exports.signup = async (req, res) => {
         const user = await authService.signup(req.body);
         res.status(201).json(user);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        if (error.message === 'Email already exists.') {
+            res.status(400).json({ message: error.message });
+        } else {
+            res.status(500).json({ message: 'An internal server error occurred.' });
+        }
     }
 };
 

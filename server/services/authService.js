@@ -3,6 +3,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 exports.signup = async (userData) => {
+    const existingUser = await authRepository.findUserByEmail(userData.email);
+    if (existingUser) {
+        throw new Error('Email already exists.');
+    }
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const user = await authRepository.createUser({ ...userData, password: hashedPassword });
     return user;
