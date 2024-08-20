@@ -31,9 +31,7 @@ const Login = () => {
         "http://localhost:8080/api/auth/login",
         { email, password }
       );
-      // Save the token (e.g., localStorage)
       localStorage.setItem("token", response.data.token);
-      // Redirect to the home page
       navigate("/");
     } catch (err) {
       setError(err.response.data.message || "An error occurred");
