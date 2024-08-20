@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Paper, Typography, Button, Grid, Box } from "@mui/material";
+import { Paper, Typography, Button, Grid, Box, Avatar } from "@mui/material";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
-  const [images, setImages] = useState([
-    "https://images.unsplash.com/photo-1721993739400-a95e9eb7b4a8?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1663021683225-1deeddbaf5b7?q=80&w=1862&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1719431103422-ddfdb74aee85?q=80&w=1921&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1633536309025-070cbbffabd6?q=80&w=1915&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1627669727178-f178a2b93331?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ]);
 
   useEffect(() => {
     async function fetchData() {
@@ -23,8 +17,6 @@ const BlogList = () => {
     }
     fetchData();
   }, []);
-
-  console.log("Blogs state:", blogs);
 
   return (
     <Box mx={{ xs: 2, sm: 8, md: 12 }}>
@@ -54,7 +46,7 @@ const BlogList = () => {
                 }}
               >
                 <img
-                  src={images[index]}
+                  src={blog.image}
                   alt={blog.title}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
@@ -63,18 +55,25 @@ const BlogList = () => {
 
             {/* Blog Details */}
             <Grid item xs={12} md={8}>
-              <Typography variant="h5" gutterBottom>
-                {blog.title}
-              </Typography>{" "}
-              <Typography variant="subtitle2" gutterBottom>
-                {blog.body.slice(0, 100) + `...`}
-              </Typography>
+              <Box mb={{ lg: 4 }}>
+                <Typography variant="h5" gutterBottom>
+                  {blog.title}
+                </Typography>{" "}
+                <Typography variant="subtitle2" gutterBottom>
+                  {blog.body.slice(0, 100) + `...`}
+                </Typography>
+              </Box>
               {/* Author Info */}
               <Grid
                 container
                 alignItems="center"
                 style={{ marginBottom: "8px" }}
               >
+                <Avatar
+                  style={{ marginRight: "8px" }}
+                  src={blog.author?.avatar}
+                ></Avatar>
+
                 <div>
                   <Typography variant="body1">
                     {blog.author?.username || "anonymous"}
@@ -82,9 +81,11 @@ const BlogList = () => {
                 </div>
               </Grid>
               {/* Read More Button */}
-              <Button variant="outlined" color="primary">
-                Read More
-              </Button>
+              <Link to={`/blog/${blog._id}`}>
+                <Button variant="outlined" color="primary">
+                  Read More
+                </Button>
+              </Link>
             </Grid>
           </Grid>
         </Paper>
