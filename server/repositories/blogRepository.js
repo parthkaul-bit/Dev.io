@@ -4,7 +4,7 @@ const Comment = require('../models/commentModel');
 
 exports.findAllBlogs = async () => {
     try {
-        return await Blog.find().populate('author', 'username').populate('likes').populate('comments');
+        return await Blog.find().populate('author', 'username avatar').populate('likes').populate('comments');
     } catch (error) {
         console.error('Error finding blogs:', error); 
         throw error;
