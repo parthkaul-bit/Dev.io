@@ -2,12 +2,13 @@ const authRepository = require('../repositories/authRepository');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+let avatarCounter = 1; 
+
 exports.signup = async (userData) => {
     const existingUser = await authRepository.findUserByEmail(userData.email);
     if (existingUser) {
         throw new Error('Email already exists.');
     }
-    let avatarCounter = 1; 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const avatarUrl = `https://avatar.iran.liara.run/public/${avatarCounter}`;
     avatarCounter = (avatarCounter % 100 ) + 1;   
