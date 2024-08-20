@@ -7,8 +7,12 @@ exports.signup = async (userData) => {
     if (existingUser) {
         throw new Error('Email already exists.');
     }
+    let avatarCounter = 1; 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
-    const user = await authRepository.createUser({ ...userData, password: hashedPassword });
+    const avatarUrl = `https://avatar.iran.liara.run/public/${avatarCounter}`;
+    avatarCounter = (avatarCounter % 100 ) + 1;   
+
+    const user = await authRepository.createUser({ ...userData, password: hashedPassword, avatar: avatarUrl  });
     return user;
 };
 
