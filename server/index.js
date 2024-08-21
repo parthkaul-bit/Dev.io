@@ -17,6 +17,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 
 // Database connection
 mongoose
@@ -41,7 +42,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send({ message: "Something went wrong!" });
 });
-
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

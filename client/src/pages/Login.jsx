@@ -32,11 +32,15 @@ const Login = () => {
         { email, password }
       );
       localStorage.setItem("token", response.data.token);
-      navigate("/");
+      navigate("/loading", { replace: true });
+      setTimeout(() => {
+        navigate("/");
+      }, 0);
     } catch (err) {
       setError(err.response.data.message || "An error occurred");
     }
   };
+
   return (
     <Container
       maxWidth="xs"

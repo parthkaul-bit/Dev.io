@@ -142,7 +142,11 @@ export default function Signup() {
           <Box sx={{ marginTop: 2, textAlign: "center" }}>
             <Typography variant="body2">
               Already have an account?{" "}
-              <Link to="/login" variant="body2">
+              <Link
+                to="/login"
+                variant="body2"
+                style={{ color: "inherit", textDecoration: "underline" }}
+              >
                 Login
               </Link>
             </Typography>

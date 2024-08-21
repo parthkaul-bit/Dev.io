@@ -1,14 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const blogController = require('../controllers/blogController');
+const blogController = require("../controllers/blogController");
+const authMiddleware = require("../middleware/authMiddleware");
 
 // Route to get all blogs
-router.get('/', blogController.getAllBlogs);
+router.get("/", blogController.getAllBlogs);
 
 // Route to get a specific blog by ID
-router.get('/:blog_id', blogController.getBlogById);
+router.get("/:blog_id", blogController.getBlogById);
 
 // Route to create a new blog
-router.post('/', blogController.createBlog);
+router.post("/", authMiddleware, blogController.createBlog);
 
 module.exports = router;
