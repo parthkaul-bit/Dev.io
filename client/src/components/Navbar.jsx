@@ -23,7 +23,6 @@ const Navbar = () => {
         if (userId) {
           try {
             const userData = await getUserInfo(userId);
-            console.log("Fetched user data:", userData);
             setUser(userData);
           } catch (error) {
             console.error("Failed to fetch user information", error);
@@ -34,13 +33,6 @@ const Navbar = () => {
       fetchUser();
     }
   }, [user, setUser]);
-
-  useEffect(() => {
-    if (user) {
-      // Logic to update or trigger re-render in Navbar
-      console.log("User logged in:", user);
-    }
-  }, [user]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -71,9 +63,6 @@ const Navbar = () => {
 
           {user ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Typography variant="body1" sx={{ marginRight: 2 }}>
-                {user.username}
-              </Typography>
               <img
                 src={user.avatar}
                 alt="Profile"
@@ -84,6 +73,15 @@ const Navbar = () => {
                   objectFit: "cover",
                 }}
               />
+              <Typography
+                variant="body1"
+                sx={{
+                  marginLeft: 2,
+                  display: { xs: "none", md: "inherit", lg: "inherit" },
+                }}
+              >
+                {user.username}
+              </Typography>
               <IconButton
                 size="large"
                 edge="end"
@@ -91,7 +89,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 color="inherit"
                 onClick={handleLogout}
-                sx={{ marginLeft: 2 }}
+                sx={{ marginLeft: { md: 4 } }}
               >
                 <LogoutIcon />
               </IconButton>

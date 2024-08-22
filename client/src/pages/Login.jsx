@@ -46,7 +46,6 @@ const Login = () => {
       setError(
         err.response?.data?.message || "An error occurred during login."
       );
-      console.error("Login error:", err);
     }
   };
 

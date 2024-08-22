@@ -60,7 +60,11 @@ const BlogList = () => {
                   {blog.title}
                 </Typography>{" "}
                 <Typography variant="subtitle2" gutterBottom>
-                  {blog.body.slice(0, 100) + `...`}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: blog.body.slice(0, 200) + `...`,
+                    }}
+                  />
                 </Typography>
               </Box>
               {/* Author Info */}
