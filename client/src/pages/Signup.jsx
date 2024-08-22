@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Paper,
@@ -7,13 +7,15 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
+import { getCurrentUser } from "../utils/auth";
+import { getUserInfo } from "../utils/getUserInfo";
 
 export default function Signup() {
   const navigate = useNavigate();
+  const { setUser } = useUser();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -64,10 +66,26 @@ export default function Signup() {
           password,
         }
       );
+
+      // Login the user immediately after signup
+      const loginResponse = await axios.post(
+        "http://localhost:8080/api/auth/login/",
+        {
+          email,
+          password,
+        }
+      );
+
+      localStorage.setItem("token", loginResponse.data.token);
+
+      const userId = getCurrentUser();
+      const userData = await getUserInfo(userId);
+      setUser(userData);
+
+      // Navigate to home page
       navigate("/");
-      console.log("Signup successful:", response.data);
+      console.log("Signup and login successful:", response.data);
     } catch (err) {
-      // Handle error
       setError(
         err.response?.data?.message || "An error occurred during signup."
       );

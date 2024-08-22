@@ -10,8 +10,12 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { getUserInfo } from "../utils/getUserInfo";
+import { getCurrentUser } from "../utils/auth";
+import { useUser } from "../context/UserContext";
 
 const Login = () => {
+  const { setUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -32,12 +36,17 @@ const Login = () => {
         { email, password }
       );
       localStorage.setItem("token", response.data.token);
-      navigate("/loading", { replace: true });
-      setTimeout(() => {
-        navigate("/");
-      }, 0);
+
+      const userId = getCurrentUser();
+      const userData = await getUserInfo(userId);
+      setUser(userData);
+
+      navigate("/", { replace: true });
     } catch (err) {
-      setError(err.response.data.message || "An error occurred");
+      setError(
+        err.response?.data?.message || "An error occurred during login."
+      );
+      console.error("Login error:", err);
     }
   };
 

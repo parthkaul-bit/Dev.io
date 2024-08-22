@@ -17,22 +17,30 @@ const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const userId = getCurrentUser();
-      if (userId) {
-        try {
-          const userData = await getUserInfo(userId);
-          setUser(userData);
-        } catch (error) {
-          console.error("Failed to fetch user information", error);
+    if (!user) {
+      const fetchUser = async () => {
+        const userId = getCurrentUser();
+        if (userId) {
+          try {
+            const userData = await getUserInfo(userId);
+            console.log("Fetched user data:", userData);
+            setUser(userData);
+          } catch (error) {
+            console.error("Failed to fetch user information", error);
+          }
         }
-      }
-    };
+      };
 
-    fetchUser();
-  }, [setUser]);
+      fetchUser();
+    }
+  }, [user, setUser]);
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+    if (user) {
+      // Logic to update or trigger re-render in Navbar
+      console.log("User logged in:", user);
+    }
+  }, [user]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
