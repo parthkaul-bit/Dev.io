@@ -30,11 +30,22 @@ const CreateBlog = () => {
       return;
     }
 
+    // Split tags by commas, trim spaces, and filter out empty strings
+    const tagsArray = tags
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter((tag) => tag.length > 0);
+
+    if (tagsArray.length === 0) {
+      setError("Please provide at least one tag");
+      return;
+    }
+
     const blogData = {
       title,
       image,
       body,
-      tags: tags.split(",").map((tag) => tag.trim()),
+      tags: tagsArray,
       author: user,
     };
 
@@ -51,7 +62,6 @@ const CreateBlog = () => {
       console.log(err);
     }
   };
-
   return (
     <Container
       maxWidth="lg"

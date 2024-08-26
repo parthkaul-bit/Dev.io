@@ -3,7 +3,7 @@ import { Paper, Typography, Button, Grid, Box, Avatar } from "@mui/material";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const BlogList = () => {
+const BlogList = ({ selectedTags }) => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
@@ -18,6 +18,13 @@ const BlogList = () => {
     fetchData();
   }, []);
 
+  // Filter blogs based on selected tags
+  const filteredBlogs = blogs.filter((blog) =>
+    selectedTags.length === 0
+      ? true
+      : blog.tags.some((tag) => selectedTags.includes(tag))
+  );
+
   return (
     <Box mx={{ xs: 2, sm: 8, md: 12 }}>
       <Typography
@@ -28,7 +35,7 @@ const BlogList = () => {
       >
         FEATURED BLOGS
       </Typography>
-      {blogs.map((blog, index) => (
+      {filteredBlogs.map((blog, index) => (
         <Paper
           key={index}
           style={{ padding: "16px", marginBottom: "24px" }}
@@ -58,7 +65,7 @@ const BlogList = () => {
               <Box mb={{ lg: 4 }}>
                 <Typography variant="h5" gutterBottom>
                   {blog.title}
-                </Typography>{" "}
+                </Typography>
                 <Typography variant="subtitle2" gutterBottom>
                   <div
                     dangerouslySetInnerHTML={{

@@ -6,6 +6,9 @@ const authMiddleware = require("../middleware/authMiddleware");
 // Route to get all blogs
 router.get("/", blogController.getAllBlogs);
 
+// Route to get unique tags
+router.get("/tags", blogController.getUniqueTags);
+
 // Route to get a specific blog by ID
 router.get("/:blog_id", blogController.getBlogById);
 
