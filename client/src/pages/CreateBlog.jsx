@@ -61,7 +61,7 @@ const CreateBlog = () => {
         alignItems: "center",
         minHeight: "80vh",
         backgroundColor: "#121212",
-        marginTop: 32, // Add margin on top
+        marginTop: 16,
       }}
     >
       <Paper
@@ -71,8 +71,12 @@ const CreateBlog = () => {
           color: "#e0e0e0",
           width: "100%",
           display: "flex",
+          flexDirection: "column",
         }}
       >
+        <Typography variant="h4" component="h2" gutterBottom align="center">
+          Create a New Blog
+        </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Editor
@@ -87,18 +91,13 @@ const CreateBlog = () => {
                   "insertdatetime media table paste code help wordcount",
                 ],
                 toolbar:
-                  "undo redo | formatselect | bold italic backcolor | \
-                  alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help",
+                  "bold italic underline strikethrough | blockquote code | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | hr link | removeformat | charmap | fullscreen | insertfile image media | forecolor backcolor",
                 content_style: "body { color: #e0e0e0; background: #1e1e1e; }",
               }}
               onEditorChange={(content) => setBody(content)}
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography variant="h4" component="h2" gutterBottom>
-              Create a New Blog
-            </Typography>
             <form onSubmit={handleCreateBlog}>
               <TextField
                 label="Title"
