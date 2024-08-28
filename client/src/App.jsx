@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import "./App.css";
 import CreateBlog from "./pages/CreateBlog";
 import { UserProvider } from "./context/UserContext";
+import Favorites from "./pages/Favourites";
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
             <Route path="/blog/create" element={<CreateBlog />} />
             <Route path="/blog/:id" element={<BlogDetail />} />
             <Route path="/user/:id" element={<UserDetail />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </Router>
       </UserProvider>

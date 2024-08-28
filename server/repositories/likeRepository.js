@@ -41,3 +41,12 @@ exports.findLikesByBlogId = async (blogId) => {
     throw error;
   }
 };
+
+exports.findLikesByUserId = async (userId) => {
+  try {
+    return await Like.find({ user_id: userId });
+  } catch (error) {
+    console.error("Error finding likes by user ID:", error);
+    throw error;
+  }
+};

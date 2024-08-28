@@ -6,6 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import LogoutIcon from "@mui/icons-material/Logout";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import { getUserInfo } from "../utils/getUserInfo";
@@ -46,8 +47,16 @@ const Navbar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <CodeIcon />
-          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link
+            to="/"
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <CodeIcon />
             <Typography
               variant="overline"
               noWrap
@@ -63,21 +72,35 @@ const Navbar = () => {
 
           {user ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Link
+                to="/favorites"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <IconButton
+                  size="small"
+                  edge="end"
+                  aria-label="favorites"
+                  color="inherit"
+                >
+                  <FavoriteIcon />
+                </IconButton>
+              </Link>
               <img
-                src={user.avatar}
+                src={user.avatar || "/default-avatar.png"}
                 alt="Profile"
                 style={{
                   width: 40,
                   height: 40,
                   borderRadius: "50%",
                   objectFit: "cover",
+                  marginLeft: 16,
                 }}
               />
               <Typography
                 variant="body1"
                 sx={{
                   marginLeft: 2,
-                  display: { xs: "none", md: "inherit", lg: "inherit" },
+                  display: { xs: "none", md: "block" },
                 }}
               >
                 {user.username}
@@ -94,32 +117,35 @@ const Navbar = () => {
                 <LogoutIcon />
               </IconButton>
             </Box>
-          ) : isLoginPage ? (
-            <Link
-              to="/signup"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <Typography
-                variant="subtitle1"
-                color="inherit"
-                sx={{ marginLeft: 2 }}
-              >
-                Sign Up
-              </Typography>
-            </Link>
           ) : (
-            <Link
-              to="/login"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <Typography
-                variant="subtitle1"
-                color="inherit"
-                sx={{ marginLeft: 2 }}
-              >
-                Login
-              </Typography>
-            </Link>
+            !isLoginPage && (
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Link
+                  to="/login"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Typography
+                    variant="subtitle1"
+                    color="inherit"
+                    sx={{ marginLeft: 2 }}
+                  >
+                    Login
+                  </Typography>
+                </Link>
+                <Link
+                  to="/signup"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Typography
+                    variant="subtitle1"
+                    color="inherit"
+                    sx={{ marginLeft: 2 }}
+                  >
+                    Sign Up
+                  </Typography>
+                </Link>
+              </Box>
+            )
           )}
         </Toolbar>
       </AppBar>

@@ -22,7 +22,7 @@ const CommentList = ({ comments }) => {
 
   if (commentsWithUserInfo.length === 0) {
     return (
-      <Typography variant="h6" align="center">
+      <Typography variant="h6" align="center" marginTop={4}>
         No comments available
       </Typography>
     );

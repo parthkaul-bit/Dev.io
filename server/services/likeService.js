@@ -72,3 +72,23 @@ exports.getAllLikesForBlog = async (blogId) => {
     throw error;
   }
 };
+
+exports.getLikedBlogsByUser = async (userId) => {
+  try {
+    const likes = await likeRepository.findLikesByUserId(userId);
+    const likedBlogIds = likes.map((like) => like.blog_id);
+    return await blogRepository.findBlogsByIds(likedBlogIds);
+  } catch (error) {
+    console.error("Error getting liked blogs by user:", error);
+    throw error;
+  }
+};
+
+exports.findLikesByUserId = async (userId) => {
+  try {
+    return await Like.find({ user_id: userId });
+  } catch (error) {
+    console.error("Error finding likes by user ID:", error);
+    throw error;
+  }
+};

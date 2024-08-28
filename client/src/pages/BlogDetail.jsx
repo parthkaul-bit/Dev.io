@@ -127,12 +127,16 @@ function BlogDetail() {
           <div dangerouslySetInnerHTML={{ __html: blog.body }} />
         </Typography>
 
-        <LikeButton blogId={blog._id} userId={user._id} />
-        <CommentForm
-          blogId={blog._id}
-          userId={user._id}
-          onCommentAdded={handleCommentAdded}
-        />
+        {user?._id && (
+          <>
+            <LikeButton blogId={blog._id} userId={user._id} />
+            <CommentForm
+              blogId={blog._id}
+              userId={user._id}
+              onCommentAdded={handleCommentAdded}
+            />
+          </>
+        )}
         <CommentList comments={comments} />
       </Paper>
     </Container>

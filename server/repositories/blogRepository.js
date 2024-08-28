@@ -48,3 +48,12 @@ exports.findUniqueTags = async () => {
     throw error;
   }
 };
+
+exports.findBlogsByIds = async (blogIds) => {
+  try {
+    return await Blog.find({ _id: { $in: blogIds } });
+  } catch (error) {
+    console.error("Error finding blogs by IDs:", error);
+    throw error;
+  }
+};
