@@ -61,7 +61,8 @@ const Favorites = () => {
         fontSize={{ xs: "20px", md: "24px" }}
         textAlign={"center"}
         gutterBottom
-        mt={4}
+        mt={2}
+        mb={2}
       >
         YOUR FAVORITE BLOGS
       </Typography>

@@ -6,6 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 const LikeButton = ({ blogId, userId }) => {
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
+  const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     const fetchLikes = async () => {
@@ -13,7 +14,6 @@ const LikeButton = ({ blogId, userId }) => {
         const { data } = await axios.get(
           `http://localhost:8080/api/likes/${blogId}`
         );
-        // Set likes count to the number of likes
         setLikesCount(data.likes.length);
       } catch (error) {
         console.error("Failed to fetch likes", error);
@@ -60,14 +60,23 @@ const LikeButton = ({ blogId, userId }) => {
         setLikesCount((prev) => prev + 1);
       }
       setLiked(!liked);
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 300); // Reset animation state
     } catch (error) {
       console.error("Error liking/unliking blog", error);
     }
   };
 
+  // Inline styles for the heart icon
+  const heartIconStyles = {
+    transition: "transform 0.2s ease-in-out, color 0.2s ease-in-out",
+    transform: animate ? "scale(1.3)" : "scale(1)",
+    color: liked ? "red" : "inherit",
+  };
+
   return (
     <div>
-      <IconButton onClick={handleLike} color={liked ? "error" : "default"}>
+      <IconButton onClick={handleLike} style={heartIconStyles}>
         <FavoriteIcon />
       </IconButton>
       <span>{likesCount}</span>

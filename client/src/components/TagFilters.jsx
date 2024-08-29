@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Chip } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import axios from "axios";
 
 const TagFilters = ({ onTagChange }) => {
@@ -30,21 +30,32 @@ const TagFilters = ({ onTagChange }) => {
   };
 
   return (
-    <Box mx={{ xs: 2, sm: 8, md: 12 }} mt={2} overflow="auto">
-      <Box>
-        {tags.map((tag, index) => (
-          <Chip
-            key={index}
-            label={tag}
-            onClick={() => handleTagClick(tag)}
-            color={selectedTags.includes(tag) ? "primary" : "default"}
-            style={{ margin: "4px" }}
-            clickable
-            size="small"
-          />
-        ))}
+    <>
+      <Typography
+        variant="subtitle1"
+        fontSize={{ xs: "20px", md: "24px" }}
+        mt={2}
+        textAlign={"center"}
+        gutterBottom
+      >
+        FEATURED BLOGS
+      </Typography>
+      <Box mx={{ xs: 2, sm: 8, md: 12 }} mt={2} overflow="auto">
+        <Box>
+          {tags.map((tag, index) => (
+            <Chip
+              key={index}
+              label={tag}
+              onClick={() => handleTagClick(tag)}
+              color={selectedTags.includes(tag) ? "primary" : "default"}
+              style={{ margin: "4px" }}
+              clickable
+              size="small"
+            />
+          ))}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

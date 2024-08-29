@@ -27,14 +27,6 @@ const BlogList = ({ selectedTags }) => {
 
   return (
     <Box mx={{ xs: 2, sm: 8, md: 12 }}>
-      <Typography
-        variant="subtitle1"
-        fontSize={{ xs: "20px", md: "24px" }}
-        textAlign={"center"}
-        gutterBottom
-      >
-        FEATURED BLOGS
-      </Typography>
       {filteredBlogs.map((blog, index) => (
         <Paper
           key={index}
