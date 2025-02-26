@@ -58,23 +58,17 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/auth/signup/",
-        {
-          username,
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("/api/auth/signup/", {
+        username,
+        email,
+        password,
+      });
 
       // Login the user immediately after signup
-      const loginResponse = await axios.post(
-        "http://localhost:8080/api/auth/login/",
-        {
-          email,
-          password,
-        }
-      );
+      const loginResponse = await axios.post("/api/auth/login/", {
+        email,
+        password,
+      });
 
       localStorage.setItem("token", loginResponse.data.token);
 

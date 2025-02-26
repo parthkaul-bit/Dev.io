@@ -11,9 +11,7 @@ const LikeButton = ({ blogId, userId }) => {
   useEffect(() => {
     const fetchLikes = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:8080/api/likes/${blogId}`
-        );
+        const { data } = await axios.get(`/api/likes/${blogId}`);
         setLikesCount(data.likes.length);
       } catch (error) {
         console.error("Failed to fetch likes", error);
@@ -25,12 +23,9 @@ const LikeButton = ({ blogId, userId }) => {
   useEffect(() => {
     const checkLikeStatus = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:8080/api/likes/status`,
-          {
-            params: { blog_id: blogId, user_id: userId },
-          }
-        );
+        const { data } = await axios.get(`/api/likes/status`, {
+          params: { blog_id: blogId, user_id: userId },
+        });
         setLiked(data.liked);
       } catch (error) {
         console.error("Error checking like status", error);
@@ -49,11 +44,11 @@ const LikeButton = ({ blogId, userId }) => {
       };
 
       if (liked) {
-        await axios.delete(`http://localhost:8080/api/likes/`, requestConfig);
+        await axios.delete(`/api/likes/`, requestConfig);
         setLikesCount((prev) => prev - 1);
       } else {
         await axios.post(
-          `http://localhost:8080/api/likes/`,
+          `/api/likes/`,
           { blog_id: blogId, user_id: userId },
           requestConfig
         );

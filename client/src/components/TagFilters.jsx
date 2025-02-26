@@ -9,9 +9,7 @@ const TagFilters = ({ onTagChange }) => {
   useEffect(() => {
     async function fetchTags() {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/api/blogs/tags"
-        );
+        const response = await axios.get("/api/blogs/tags");
         setTags(response.data);
       } catch (err) {
         console.log(err);

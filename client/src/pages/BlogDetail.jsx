@@ -22,7 +22,7 @@ function BlogDetail() {
 
   const fetchComments = async (blogId) => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/comments/", {
+      const { data } = await axios.get("/api/comments/", {
         params: { blog_id: blogId },
       });
       if (Array.isArray(data)) {
