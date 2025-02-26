@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/api/(.*)",
-        "destination": "http://localhost:8080/api/$1"
+        "destination": "https://dev-io-two.vercel.app/api/$1"
       },
       {
         "source": "/(.*)",
