@@ -73,7 +73,7 @@ function BlogDetail() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: 4, padding: { xs: 2, sm: 3 } }}>
+    <Container maxWidth="100%" sx={{ marginTop: 4, padding: { xs: 2, sm: 3 } }}>
       <Paper elevation={3} sx={{ padding: { xs: 2, sm: 3 }, borderRadius: 2 }}>
         <Box
           component="img"

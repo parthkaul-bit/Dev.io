@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Paper, Typography, Button, Grid, Box, Avatar } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Button,
+  Grid,
+  Box,
+  Avatar,
+  Container,
+  CircularProgress,
+} from "@mui/material";
 import { useUser } from "../context/UserContext";
 import { getBlogInfo } from "../utils/getBlogInfo";
 import axios from "axios";
@@ -51,7 +60,21 @@ const Favorites = () => {
     fetchFavorites();
   }, [user]); // Fetch when user data changes
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <Container
+        maxWidth="md"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "80vh",
+        }}
+      >
+        <CircularProgress />
+      </Container>
+    );
+  }
   if (error) return <p>{error}</p>;
 
   return (

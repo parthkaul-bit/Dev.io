@@ -14,7 +14,7 @@ const THEME = createTheme({
       main: "#dc004e", // Customize secondary color for dark theme
     },
     background: {
-      default: "#121212", // Dark background color
+      default: "#1c1c1c", // Dark background color
       paper: "#1d1d1d", // Dark paper color (e.g., for cards)
     },
     text: {
